@@ -1,0 +1,59 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "allwinner,sun4i-a10", "allwinner,sun7i-a20", "allwinner,sun8i-h3", "allwinner,sun50i-a64", "allwinner,sun50i-h5";
+
+	fragment@0 {
+		target = <&pio>;
+		__overlay__ {
+			 gpio_keys: gpio_keys {
+				pins = "PA7","PA8","PA9","PA10","PA21";
+				function = "gpio_in";
+				bias-pull-up;
+			};
+		};
+	};
+
+	fragment@1 {
+		target-path = "/";
+		__overlay__ {
+			gpio-keys-user {
+
+				compatible = "gpio-keys";
+				pinctrl-names = "default";
+				pinctrl-0 = <&gpio_keys>;
+
+				g-keys_up {
+					label = "GPIO KEY_UP";
+					linux,code = <103>; /* KEY_UP, see /usr/include/linux/input-event-codes.h */
+					gpios = <&pio 0 7 1>; /* PA7 GPIO_ACTIVE_LOW */
+				};
+
+				g-keys_down {
+					label = "GPIO KEY_DOWN";
+					linux,code = <108>; /* KEY_DOWN, see /usr/include/linux/input-event-codes.h */
+					gpios = <&pio 0 8 1>; /* PA8 GPIO_ACTIVE_LOW */
+				};
+
+				g-keys_left {
+					label = "GPIO KEY_LEFT";
+					linux,code = <105>; /* KEY_LEFT, see /usr/include/linux/input-event-codes.h */
+					gpios = <&pio 0 9 1>; /* PA9 GPIO_ACTIVE_LOW */
+				};
+
+				g-keys_right {
+					label = "GPIO KEY_RIGHT";
+					linux,code = <106>; /* KEY_RIGHT, see /usr/include/linux/input-event-codes.h */
+					gpios = <&pio 0 10 1>; /* PA10 GPIO_ACTIVE_LOW */
+				};
+				g-keys_enter {
+					label = "GPIO KEY_ENTER";
+					linux,code = <28>; /* KEY_ENTER, see /usr/include/linux/input-event-codes.h */
+					gpios = <&pio 0 21 1>; /* PA21 GPIO_ACTIVE_LOW */
+				};
+
+			};
+		};
+	};
+};
