@@ -1,7 +1,7 @@
 ![Logo](images/gpioknopki.png)
 
 
-
+armbian-config -> Software -> Headers
 
 git clone https://github.com/ua3nbw-cf/gpio-keys
 
